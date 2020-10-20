@@ -1,0 +1,237 @@
+{
+    "Useful": {
+        "emoji": ":wrench:",
+        "commands": {
+            "help": {
+                "usage": "{command(optional)}",
+                "brief": "lists all commands or gets info about a command",
+                "long": "Gets a list of all commands. If you give a command name, this command will get more detailed info about that specific command."
+            },
+            "addprefix": {
+                "usage": "{prefix}",
+                "brief": "adds a custom prefix",
+                "long": "Adds a custom prefix for this server. If the prefix has spaces before or after, use quotes around it. Ex. \"y \""
+            },
+            "removeprefix": {
+                "usage": "{prefix}",
+                "brief": "removes a custom prefix",
+                "long": "Removes a custom prefix for this server. If the prefix has spaces before or after, use quotes around it. Ex. \"y \""
+            },
+            "prefixes": {
+                "usage": "",
+                "brief": "shows all custom server prefixes",
+                "long": "Shows all custom server prefixes."
+            },
+            "ping": {
+                "usage": "",
+                "brief": "measures ping",
+                "long": "Measures ping in milliseconds. If you get the lowest/highest ping ever achieved, your name will show up on the ping leaderboard."
+            },
+            "pingleaderboard": {
+                "usage": "",
+                "brief": "shows the fastest and slowest pings ever",
+                "long": "Gets the fastest and slowest pings ever. If you get the lowest/highest ping ever achieved, your name will show up on this leaderboard."
+            },
+            "hi": {
+                "usage": "",
+                "brief": "says hello back",
+                "long": "Says hello back."
+            },
+            "say": {
+                "usage": "{message}",
+                "brief": "says a message",
+                "long": "Says a message"
+            },
+            "spam": {
+                "usage": "{message} {amount}",
+                "brief": "spams a message",
+                "long": "Spams a message a certain amount of times."
+            },
+            "8ball": {
+                "usage": "",
+                "brief": "asks the 8ball a question",
+                "long": "Asks the 8ball a question."
+            },
+            "coinflip": {
+                "usage": "",
+                "brief": "flips a coin",
+                "long": "Flips a coin."
+            },
+            "speakthetruth": {
+                "usage": "",
+                "brief": "speaks the truth",
+                "long": "Speaks the truth."
+            },
+            "weather": {
+                "usage": "{city}",
+                "brief": "gets the weather",
+                "long": "Gets the weather for a city."
+            },
+            "wiki": {
+                "usage": "{subject}",
+                "brief": "searches wikipedia for a topic",
+                "long": "Gets a wikipedia summary on a topic."
+            },
+            "serverinfo": {
+                "usage": "",
+                "brief": "gets info about server",
+                "long": "Gets info about the current server."
+            }
+        }
+    },
+    "Levels": {
+        "emoji": ":arrow_up:",
+        "commands": {
+            "level": {
+                "usage": "{user(optional)}",
+                "brief": "shows your level info",
+                "long": "Shows your level, xp and badges. If a user is provided, it will get info for that user instead."
+            },
+            "leaderboard": {
+                "usage": "",
+                "brief": "shows the server leaderboard",
+                "long": "Shows the server leaderboard with the top 20 users in this server based on xp. If you are not in the top 20, your name will show at the bottom with your rank."
+            },
+            "globalleaderboard": {
+                "usage": "",
+                "brief": "shows the global leaderboard",
+                "long": "Shows the global leaderboard (across all servers) with the top 20 users based on xp. If you are not in the top 20, your name will show at the bottom with your rank."
+            },
+            "badges": {
+                "usage": "",
+                "brief": "shows all badges",
+                "long": "Shows all badges and how they are obtained."
+            }
+        }
+    },
+    "Moderation": {
+        "emoji": ":hammer:",
+        "commands": {
+            "mute": {
+                "usage": "{user}",
+                "brief": "mutes a user",
+                "long": "Mutes a user by giving them the mute role, which prevents them from speaking in any text channel."
+            },
+            "unmute": {
+                "usage": "{user}",
+                "brief": "unmutes a user",
+                "long": "Unmutes a muted user by removing the Muted role."
+            },
+            "nickname": {
+                "usage": "{user} {nickname}",
+                "brief": "nicknames a user",
+                "long": "Nicknames a user."
+            },
+            "muteall": {
+                "usage": "",
+                "brief": "mutes everyone",
+                "long": "Mutes everyone in the server that the bot has permissions to manage."
+            },
+            "unmuteall": {
+                "usage": "",
+                "brief": "unmutes everyone",
+                "long": "Unmutes everyone in the server that the bot has permissions to manage."
+            },
+            "nicknameall": {
+                "usage": "{name}",
+                "brief": "nicknames everyone",
+                "long": "Nicknames everyone in the server that the bot has permissions to manage."
+            },
+            "kick": {
+                "usage": "{user}",
+                "brief": "kicks a user",
+                "long": "Kicks a user."
+            }
+        }
+    },
+    "Reddit": {
+        "emoji": ":alien:",
+        "commands": {
+            "meme": {
+                "usage": "",
+                "brief": "gets a meme from r/dankmemes",
+                "long": "Gets a random meme from r/dankmemes"
+            },
+            "reddit": {
+                "usage": "{subreddit}",
+                "brief": "gets a random post from a subreddit",
+                "long": "Gets a random post from the specified subreddit."
+            }
+        }
+    },
+    "Games": {
+        "emoji": ":game_die:",
+        "commands": {
+            "hangman": {
+                "usage": "",
+                "brief": "starts a hangman game",
+                "long": "Starts a game of hangman. Guess letters by sending them in the channel. The goal is to guess the word's letters. You get 0.5x your level in xp if you win."
+            },
+            "trivia": {
+                "usage": "",
+                "brief": "gives a trivia question",
+                "long": "Gives a trivia question. Type the letter of the answer or the answer itself to answer the question. You get 0.25x your level in xp if you answer an easy question, 0.5x for a medium question, and 1x for a hard question."
+            },
+            "tictactoe": {
+                "usage": "{opponent}",
+                "brief": "starts a game of tictactoe",
+                "long": "Starts a game of tictactoe. Type the number of the spot you want to go in. The goal is to get three in a row before your opponent. You get 0.5x your level in xp if you win. If you tie, both players get 0.25x their level in xp."
+            },
+            "2048": {
+                "usage": "",
+                "brief": "starts a game of 2048",
+                "long": "Starts a game of 2048. Type w, a, s, or d to move. The goal is to get the number 2048 by merging other numbers. If you win, you will get a full level in xp."
+            }
+        }
+    },
+    "Minecraft": {
+        "emoji": "pick:",
+        "commands": {
+            "linkmc": {
+                "usage": "{username}",
+                "brief": "links a minecraft account",
+                "long": "Links a minecraft account to the bot. After linking, you will no longer need to give a username when using commands that require username."
+            },
+            "mcserver": {
+                "usage": "{ip}",
+                "brief": "gets the status of a minecraft server",
+                "long": "Gets the current status and info about a minecraft server."
+            },
+            "skin": {
+                "usage": "{username}",
+                "brief": "gets a player's minecraft skin",
+                "long": "Gets a player's minecraft skin"
+            }
+        }
+    },
+    "Hypixel": {
+        "emoji": ":crossed_swords:",
+        "commands": {
+            "hypixel": {
+                "usage": "{username}",
+                "brief": "gets hypixel stats",
+                "long": "Gets a player's hypixel stats."
+            },
+            "bedwars": {
+                "usage": "{username} {gamemode(optional)}",
+                "brief": "gets bedwars stats",
+                "long": "Gets a player's bedwars stats. If a gamemode is provided, then this command will get stats for that specific gamemode."
+            },
+            "skywars": {
+                "usage": "{username} {gamemode(optional)}",
+                "brief": "gets skywars stats",
+                "long": "Gets a player's skywars stats. If a gamemode is provided, then this command will get stats for that specific gamemode."
+            },
+            "hypixelflist": {
+                "usage": "{username}",
+                "brief": "gets online hypixel friends",
+                "long": "Get's a player's online hypixel friends. "
+            },
+            "skyblock": {
+                "usage": "{username} {profile(optional)}",
+                "brief": "gets skyblock stats",
+                "long": "Get's a player's skyblock stats for their last active profile. If a profile is provided, then this command will get stats for that specific profile."
+            }
+        }
+    }
+}
