@@ -174,7 +174,7 @@ async def help(ctx, command = None):
 		embed = discord.Embed(
 			title = 'help',
 			color = ctx.author.color,
-			description = "Use the reactions below to go to the next page.\nIf you want to get further help, report issues, or suggest new ideas, join the Yoidbot discord!\ndiscord.gg/NPVFbnF"
+			description = "Use the reactions below to go to the next page.\nIf you want to get further help, report issues, or suggest new ideas, join the Yoidbot discord: https://discord.gg/NPVFbnF"
 		)
 		for category in page:
 			commands = ''
