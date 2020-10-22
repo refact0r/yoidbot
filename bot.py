@@ -172,7 +172,7 @@ async def help(ctx, command = None):
 	pages = [["Useful"], ["Levels", "Moderation", "Reddit"], ["Games", "Minecraft", "Hypixel"]]
 	def generate(page):
 		embed = discord.Embed(
-			title = 'help',
+			title = 'Help',
 			color = ctx.author.color,
 			description = "Use the reactions below to go to the next page.\nIf you want to get further help, report issues, or suggest new ideas, join the Yoidbot discord: https://discord.gg/NPVFbnF"
 		)

@@ -185,7 +185,7 @@
         }
     },
     "Minecraft": {
-        "emoji": "pick:",
+        "emoji": ":pick:",
         "commands": {
             "linkmc": {
                 "usage": "{username}",
