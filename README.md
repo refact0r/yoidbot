@@ -8,7 +8,18 @@
 </h1>
 
 <h4 align="center">A multipurpose discord.py bot with a variety of fun and useful commands.</h4>
-<br>
+
+<p align="center">
+  <a href="https://top.gg/bot/680466714777223183">
+    <img src="https://img.shields.io/badge/vote%20on%20-top.gg-b6bef1?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzNyIgdmlld0JveD0iMCAwIDMwIDM3Ij4KICAgIDxnIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTIyLjAxIDcuODg2VjUuNDUyYy45Ny0uNTExIDEuNDc4LTEuNDYgMS40NzgtMi41MzFDMjMuNDg4IDEuMzE0IDIyLjE4IDAgMjAuNTgxIDBjLTEuNTk4IDAtMi45MDYgMS4zMTQtMi45MDYgMi45MiAwIDEuMDcxLjQ2IDEuOTk2IDEuNDI5IDIuNTA3djIuNDU5aC04LjcyVjUuNDI3YTIuOTI3IDIuOTI3IDAgMCAwIDEuNDMtMi41MDZDMTEuODEzIDEuMzE0IDEwLjUwNCAwIDguOTA2IDAgNy4zMDggMCA2IDEuMzE0IDYgMi45MmEyLjkgMi45IDAgMCAwIDEuNDc4IDIuNTMydjIuNDM0SDIyLjAxeiIvPgogICAgICAgIDxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTI2LjM4OSAxMGMxLjk0NCAwIDMuNTE4IDEuNTYzIDMuNjExIDMuNDAxVjM3bC0zLjYxMS0zLjg2SDMuNTE5QzEuNTc0IDMzLjE0IDAgMzEuNjY4IDAgMjkuNzM3VjEzLjQwMUMwIDExLjU2MyAxLjU3NCAxMCAzLjUxOSAxMGgyMi44N3pNMTEuNSAxOGgtM2MtLjgyNSAwLTEuNS42NzUtMS41IDEuNXYzYzAgLjgyNS42NzUgMS41IDEuNSAxLjVoM2MuODI1IDAgMS41LS42NzUgMS41LTEuNXYtM2MwLS44MjUtLjY3NS0xLjUtMS41LTEuNXptMTAgMGgtM2MtLjgyNSAwLTEuNS42NzUtMS41IDEuNXYzYzAgLjgyNS42NzUgMS41IDEuNSAxLjVoM2MuODI1IDAgMS41LS42NzUgMS41LTEuNXYtM2MwLS44MjUtLjY3NS0xLjUtMS41LTEuNXoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
+         alt="top.gg">
+  </a>
+  <a href="https://discord.com/api/oauth2/authorize?client_id=680466714777223183&permissions=2110778611&scope=bot">
+    <img src="https://img.shields.io/badge/invite%20to%20-discord-7289da?style=for-the-badge&logoColor=white&logo=discord"
+         alt="top.gg">
+  </a>
+</p>
+
 <br>
 <br>
 
