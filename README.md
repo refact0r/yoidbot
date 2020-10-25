@@ -1,8 +1,18 @@
-# Yoidbot
 
-Yoidbot is a multipurpose bot with a variety of fun and useful commands.
-Features include:
+<h1 align="center">
+  <br>
+  <a href="https://top.gg/bot/680466714777223183"><img src="https://i.imgur.com/0GEBD3t.png" alt="Markdownify" width="200"></a>
+  <br>
+  Yoidbot
+  <br>
+</h1>
 
+<h4 align="center">A multipurpose Discord.py bot with a variety of fun and useful commands.</h4>
+<br>
+<br>
+<br>
+
+# Features
 ### Hypixel
 Various Hypixel game stats commands.
 - Friends list (See which of your Hypixel friends are online!)
