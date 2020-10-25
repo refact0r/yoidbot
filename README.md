@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h4 align="center">A multipurpose Discord.py bot with a variety of fun and useful commands.</h4>
+<h4 align="center">A multipurpose discord.py bot with a variety of fun and useful commands.</h4>
 <br>
 <br>
 <br>
