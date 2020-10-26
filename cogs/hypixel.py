@@ -441,7 +441,7 @@ class hypixel(commands.Cog):
         else:
             args = input.split()
             if args[0] not in cute_names:
-                uuid_data = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{args[0]}")
+                uuid_data = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{args[0]}").json()
                 if uuid_data.status_code != requests.codes.ok:
                     await msg.edit(content = "Player not found.")
                     return
