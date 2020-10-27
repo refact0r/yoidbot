@@ -199,7 +199,10 @@ async def help(ctx, command = None):
 			reaction, user = await client.wait_for('reaction_add', timeout = 300.0, check = check)
 		except asyncio.TimeoutError:
 			return
-		await reaction.remove(user)
+		try:
+			await reaction.remove(user)
+		except:
+			pass
 		if reaction.emoji == '◀️':
 			if current == 0:
 				current = len(embeds) - 1
