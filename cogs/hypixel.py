@@ -441,7 +441,7 @@ class hypixel(commands.Cog):
         else:
             args = input.split()
             if args[0] not in cute_names:
-                uuid_data = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{args[0]}").json()
+                uuid_data = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{args[0]}")
                 if uuid_data.status_code != requests.codes.ok:
                     await msg.edit(content = "Player not found.")
                     return
@@ -527,6 +527,126 @@ class hypixel(commands.Cog):
     async def skyblockstats_error(self, ctx, error):
         print(error)
         await ctx.send("Please follow format: `y.skyblockstats {username} {profile(optional)}`")
+
+    @commands.command(aliases = ['sb2', 'skyblock2'])
+    async def skyblockstats2(self, ctx, *, input = None):
+        msg = await ctx.send("Loading...")
+        cute_names = [
+            "Apple",
+            "Banana",
+            "Blueberry",
+            "Coconut",
+            "Cucumber",
+            "Grapes",
+            "Kiwi",
+            "Lemon",
+            "Lime",
+            "Mango",
+            "Orange",
+            "Papaya",
+            "Peach",
+            "Pear",
+            "Pineapple",
+            "Pomegranate",
+            "Raspberry",
+            "Strawberry",
+            "Tomato",
+            "Watermelon",
+            "Zucchini"
+        ]
+        c.execute("SELECT * FROM userxp WHERE id = %s;", (ctx.author.id,))
+        userdata = c.fetchone()
+        profile_name = ''
+        if not input:
+            if not userdata[5]:
+                await msg.edit(content = "Please follow format: `y.skyblock {username} {gamemode(optional)}`")
+                return
+            username = userdata[5]
+            uuid = userdata[6]
+        else:
+            args = input.split()
+            if args[0] not in cute_names:
+                uuid_data = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{args[0]}")
+                if uuid_data.status_code != requests.codes.ok:
+                    await msg.edit(content = "Player not found.")
+                    return
+                uuid_data = uuid_data.json()
+                username = uuid_data['name']
+                uuid = uuid_data['id']
+                if len(args) > 1:
+                    profile_name = args[1]
+            else:
+                if userdata[5]:
+                    username = userdata[5]
+                    uuid = userdata[6]
+                    profile_name = args[0]
+                else:
+                    await msg.edit(content = "Player not found.")
+                    return
+
+        skylea_data = requests.get(f"https://sky.lea.moe/api/v2/profile/{uuid}").json()
+        if 'profiles' not in skylea_data:
+            await msg.edit(content = "No skyblock data for this player.")
+            return
+        profile = ''
+        for p in skylea_data['profiles']:
+            if profile_name:
+                if skylea_data['profiles'][p]['cute_name'].lower() == profile_name.lower():
+                    profile = skylea_data['profiles'][p]
+                    break
+            else:
+                if skylea_data['profiles'][p]['current']:
+                    profile = skylea_data['profiles'][p]
+                    break
+        if not profile:
+            await msg.edit(content = f"Could not find a profile with name: `{profile_name}`")
+        embed = discord.Embed(
+            title = f"{username}'s skyblock stats",
+            color = ctx.author.color,
+            description = f"""
+                **Status:** {self.get_status(uuid)}
+                **Profile:** {profile['cute_name']}
+                **Last Update:** {profile['data']['last_updated']['text']} ({datetime.fromtimestamp(profile['data']['last_updated']['unix'] / 1000.0).strftime('%m/%d/%Y').lstrip("0")})
+                **First Joined:** {profile['data']['first_join']['text']} ({datetime.fromtimestamp(profile['data']['first_join']['unix'] / 1000.0).strftime('%m/%d/%Y').lstrip("0")})
+            """,
+        )
+        embed.set_thumbnail(url = f"https://crafatar.com/avatars/{uuid}?helm")
+        if 'bank' in profile['data']:
+            embed.add_field(name = ":bank:  Bank Balance", value = round(profile['data']['bank']))
+        else:
+            embed.add_field(name = ":bank:  Bank Balance", value = 0)
+        if 'purse' in profile['data']:
+            embed.add_field(name = ":moneybag:  Purse", value = round(profile['data']['purse']))
+        if 'fairy_souls' in profile['data']:
+            embed.add_field(name = ":rainbow:  Fairy Souls", value = f"{profile['data']['fairy_souls']['collected']}/{profile['data']['fairy_souls']['total']}")
+        stats = {
+            "health": ":heart:  Health",
+            "defense": ":shield:  Defense",
+            "effective_health": ":two_hearts:  Effective Health",
+            "strength": ":muscle:  Strength",
+            "speed": ":dash:  Speed",
+            "crit_chance": ":game_die:  Crit Chance",
+            "crit_damage": ":skull_crossbones:  Crit Damage",
+            "bonus_attack_speed": ":crossed_swords:  Attack Speed",
+            "intelligence": ":brain:  Intelligence",
+            "pet_luck": ":parrot:  Pet Luck",
+            "sea_creature_chance": ":fishing_pole_and_fish:  Sea Creature Chance",
+            "magic_find": ":sparkles:  Magic Find"
+        }
+        percentages = {
+            "speed",
+            "crit_chance",
+            "crit_damage",
+            "bonus_attack_speed",
+            "sea_creature_chance"
+        }
+        if 'stats' in profile['data']:
+            for s in stats:
+                if s in percentages:
+                    embed.add_field(name = stats[s], value = f"{profile['data']['stats'][s]}%")
+                else:
+                    embed.add_field(name = stats[s], value = profile['data']['stats'][s])
+        await msg.edit(content = '', embed = embed)
 
 def setup(client):
     client.add_cog(hypixel(client))

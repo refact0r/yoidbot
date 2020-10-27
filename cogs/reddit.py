@@ -28,6 +28,10 @@ class reddit(commands.Cog):
             color = ctx.author.color,
         )
         embed.set_footer(text = f"{submission.score} points | {submission.num_comments} comments")
+        if submission.over_18:
+            embed.description = f":warning: NSFW\n\n[{submission.title}](https://reddit.com{submission.permalink})"
+            await ctx.send(embed = embed)
+            return
         if submission.url.startswith('https://i.redd.it/'):
             embed.set_image(url = submission.url)
             await ctx.send(embed = embed)
@@ -87,9 +91,8 @@ class reddit(commands.Cog):
             embed.description += f"\n\n{submission.selftext}"
             await ctx.send(embed = embed)
             return
-        if submission.over_18:
-            embed.description = f":warning: NSFW\n\n[{submission.title}](https://reddit.com{submission.permalink})"
-            await ctx.send(embed = embed)
+        if submission.over_18 and not ctx.channel.is_nsfw():
+            await ctx.send("NSFW commands can only be used in a NSFW channel.")
             return
         if submission.url.startswith('https://i.redd.it/'):
             embed.set_image(url = submission.url)
