@@ -19,7 +19,7 @@
          alt="invite link">
   </a>
   <a href="https://discord.com/invite/NPVFbnF">
-    <img src="https://img.shields.io/badge/join%20the-support%20server-2f850f?style=for-the-badge&logoColor=white&logo=discord"
+    <img src="https://img.shields.io/badge/join%20the-support%20server-b949da?style=for-the-badge&logoColor=white&logo=discord"
          alt="support server">
   </a>
 </p>
