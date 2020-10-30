@@ -41,7 +41,6 @@ async def determine_prefix(bot, message):
 			return data[1] + ['yoidbot please ']
 	return default_prefixes
 
-intents = discord.Intents(messages=True, members=True)
 client = commands.Bot(command_prefix = determine_prefix, intents = intents)
 
 for file in os.listdir('./cogs'):
