@@ -117,7 +117,7 @@ class levels(commands.Cog):
         within = False
         author = ''
         for i in all:
-            if ctx.guild.fetch_member(i[0]):
+            if ctx.guild.get_member(i[0]):
                 name = i[1]
                 if counter <= 20:
                     if i[0] == ctx.author.id:
