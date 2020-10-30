@@ -2,7 +2,6 @@ discord
 discord.py
 requests
 praw
-COVID19Py
 psycopg2
 wikipedia
 pyowm
