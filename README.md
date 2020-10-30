@@ -16,7 +16,11 @@
   </a>
   <a href="https://discord.com/api/oauth2/authorize?client_id=680466714777223183&permissions=2110778611&scope=bot">
     <img src="https://img.shields.io/badge/invite%20to%20-discord-7289da?style=for-the-badge&logoColor=white&logo=discord"
-         alt="top.gg">
+         alt="invite link">
+  </a>
+  <a href="https://discord.com/invite/NPVFbnF">
+    <img src="https://img.shields.io/badge/join%20the-support%20server-b949da?style=for-the-badge&logoColor=white&logo=discord"
+         alt="support server">
   </a>
 </p>
 
