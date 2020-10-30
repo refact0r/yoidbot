@@ -41,7 +41,7 @@ async def determine_prefix(bot, message):
 			return data[1] + ['yoidbot please ']
 	return default_prefixes
 
-client = commands.Bot(command_prefix = determine_prefix, intents = intents)
+client = commands.Bot(command_prefix = determine_prefix)
 
 for file in os.listdir('./cogs'):
 	if file.endswith('.py'):
