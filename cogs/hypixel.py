@@ -345,6 +345,151 @@ class hypixel(commands.Cog):
             await ctx.send("Could not get data.")
         else:
             await ctx.send("Please follow format: `y.skywars {username} {gamemode(optional)}`")
+
+    @commands.command(aliases = ['d', 'duelsstats', 'duel'])
+    async def duels(self, ctx, *, input = None):
+        msg = await ctx.send("Loading...")
+        modes = [
+            ['classic', 'c'],
+            ['bridge', 'bridge1', 'bridge1v1', 'br', 'br1'],
+            ['bridge2', 'bridge2v2', 'br2'],
+            ['bridge4', 'bridge4v4', 'br4'],
+            ['uhc', 'uhc1v1', 'uhc1', 'u', 'u1'],
+            ['uhc2', 'uhc2v2', 'u2'],
+            ['uhc4', 'uhc4v4', 'u4'],
+            ['bow', 'b'],
+            ['sumo', 's'],
+            ['op', 'op1v1', 'op1', 'o1', 'o'],
+            ['bowspleef', 'bs'],
+            ['skywars', 'skywars1v1', 'skywars1', 'sw', 'sw1'],
+            ['nodebuff', 'n'],
+            ['blitz', 'bl'],
+            ['combo', 'co'],
+            ['megawalls', 'megawalls1v1', 'megawalls1', 'm', 'm1']
+        ]
+        gamemode = ''
+        c.execute("SELECT * FROM userxp WHERE id = %s;", (ctx.author.id,))
+        userdata = c.fetchone()
+        if not input:
+            if not userdata[5]:
+                await msg.edit(content = "Please follow format: `y.skywars {username} {gamemode(optional)}`")
+                return
+            player = userdata[5]
+        else:
+            args = input.split()
+            if not userdata[5]:
+                player = args[0]
+                if len(args) > 1:
+                    gamemode = ''.join(args[1:])
+            else:
+                if len(args) > 1:
+                    if any(''.join(args) in mode for mode in modes):
+                        player = userdata[5]
+                        gamemode = ''.join(args)
+                    else:
+                        player = args[0]
+                        gamemode = ''.join(args[1:])
+                else:
+                    if any(''.join(args) in mode for mode in modes):
+                        player = userdata[5]
+                        gamemode = ''.join(args)
+                    else:
+                        player = args[0]
+        data = requests.get(f"https://api.hypixel.net/player?key={key}&name={player}").json()
+        if not data['player'] or 'Duels' not in data['player']['stats']:
+            await msg.edit(content = "Player not found.")
+            return
+        embed = discord.Embed(
+            title = f":crossed_swords:  {data['player']['displayname']}'s duels stats",
+            color = ctx.author.color,
+        )
+        embed.set_thumbnail(url = f"https://crafatar.com/avatars/{data['player']['uuid']}?helm")
+        def get(input):
+            if input in data['player']['stats']['Duels']:
+                return data['player']['stats']['Duels'][input]
+            else:
+                return 0
+        stats = ''
+        otherstats = ''
+        prefixes = {
+            'wins': '_wins',
+            'losses': '_losses',
+        }
+        postfixes = {
+            'winstreak': 'current_winstreak_mode_',
+            'best_winstreak': 'best_winstreak_mode_'
+        }
+        def add_mode(mode):
+            for item in prefixes:
+                prefixes[item] = mode + prefixes[item]
+            for item in postfixes:
+                postfixes[item] = postfixes[item] + mode
+        def add_kills_stats(mode):
+            k = get(mode + '_kills')
+            d = get(mode + '_deaths')
+            if d != 0:
+                kdr = '{:.2f}'.format(k/d)
+            else:
+                kdr = k
+            return f"**{k}** kills | **{d}** deaths | **{kdr}** KDR\n"
+        if not gamemode:
+            await msg.edit(content = "Please follow format: `y.duels {username} {gamemode}`")
+            return
+        elif gamemode in modes[0]:
+            embed.description = 'Classic Duels'
+            add_mode('classic_duel')
+        elif gamemode in modes[1]:
+            embed.description = 'Bridge 1v1'
+            add_mode('bridge_duel')
+            stats += add_kills_stats('bridge_duel_bridge')
+        elif gamemode in modes[2]:
+            embed.description = 'Bridge 2v2'
+            add_mode('bridge_doubles')
+            stats += add_kills_stats('bridge_doubles_bridge')
+        elif gamemode in modes[3]:
+            embed.description = 'Bridge 4v4'
+            add_mode('bridge_four')
+            stats += add_kills_stats('bridge_four_bridge')
+        elif gamemode in modes[4]:
+            embed.description = 'UHC 1v1'
+            add_mode('uhc_duel')
+        elif gamemode in modes[5]:
+            embed.description = 'UHC 2v2'
+            add_mode('uhc_doubles')
+            stats += add_kills_stats('uhc_doubles')
+        elif gamemode in modes[6]:
+            embed.description = 'UHC 4v4'
+            add_mode('uhc_four')
+            stats += add_kills_stats('uhc_four')
+        elif gamemode in modes[7]:
+            embed.description = 'Bow Duels'
+            add_mode('bow_duel')
+        elif gamemode in modes[8]:
+            embed.description = 'Sumo Duels'
+            add_mode('sumo_duel')
+        else:
+            await msg.edit(content = "Please enter a valid gamemode.")
+            return
+        embed.add_field(name = 'Winstreak', value = get(postfixes['winstreak']))
+        embed.add_field(name = 'Best Winstreak', value = get(postfixes['best_winstreak']))
+        w = get(prefixes['wins'])
+        l = get(prefixes['losses'])
+        embed.add_field(name = 'Games Played', value = w + l)
+        if l != 0:
+            wlr = '{:.2f}'.format(w/l)
+        else:
+            wlr = w
+        stats += f"**{w}** wins | **{l}** losses | **{wlr}** WLR\n"
+        embed.add_field(name = 'Stats', value = stats, inline = False)
+        await msg.edit(content = '', embed = embed)
+
+    @skywars.error
+    async def duels_error(self, ctx, error):
+        print(error)
+        if type(error) == discord.ext.commands.errors.CommandInvokeError:
+            await ctx.send("Could not get data.")
+        else:
+            await ctx.send("Please follow format: `y.duels {username} {type} {gamemode(optional)}`")
     
     @commands.command(aliases = ['flist', 'hypixelfriends', 'hfl'])
     async def hypixelflist(self, ctx, player = None):
