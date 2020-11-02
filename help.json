@@ -222,6 +222,11 @@
                 "brief": "gets skywars stats",
                 "long": "Gets a player's skywars stats. If a gamemode is provided, then this command will get stats for that specific gamemode."
             },
+            "duels": {
+                "usage": "{username} {gamemode}",
+                "brief": "gets duels stats",
+                "long": "Gets a player's duels stats. A gamemode must be provided."
+            },
             "hypixelflist": {
                 "usage": "{username}",
                 "brief": "gets online hypixel friends",
