@@ -351,12 +351,12 @@ class hypixel(commands.Cog):
         msg = await ctx.send("Loading...")
         modes = [
             ['classic', 'c'],
-            ['bridge', 'bridge1', 'bridge1v1', 'br', 'br1'],
-            ['bridge2', 'bridge2v2', 'br2'],
-            ['bridge4', 'bridge4v4', 'br4'],
-            ['uhc', 'uhc1v1', 'uhc1', 'u', 'u1'],
-            ['uhc2', 'uhc2v2', 'u2'],
-            ['uhc4', 'uhc4v4', 'u4'],
+            ['bridge', 'bridge1', 'bridge1v1', 'br', 'br1', 'bridgesolo'],
+            ['bridge2', 'bridge2v2', 'br2', 'bridgedoubles'],
+            ['bridge4', 'bridge4v4', 'br4', 'bridgefours'],
+            ['uhc', 'uhc1v1', 'uhc1', 'u', 'u1', 'uhcsolo'],
+            ['uhc2', 'uhc2v2', 'u2', 'uhcdoubles'],
+            ['uhc4', 'uhc4v4', 'u4', 'uhcfours'],
             ['bow', 'b'],
             ['sumo', 's'],
             ['op', 'op1v1', 'op1', 'o1', 'o'],

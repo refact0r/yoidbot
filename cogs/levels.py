@@ -74,7 +74,6 @@ class levels(commands.Cog):
         level_badge = ''
         if badge_id:
             level_badge = self.level_badges[badge_id - 1][0]
-        print(f"lvl: {level}, badge_id: {badge_id}, level_badge: {level_badge}\n{data}")
         if level != data[3]:
             congrat_string = f"Congratulations {msg.author.display_name}, you are now level {level}!"
             if badge_id != data[4][1]:
@@ -87,10 +86,8 @@ class levels(commands.Cog):
             top = c.fetchall()
             for i in range(len(top)):
                 if top[i][0] == id:
-                    print("top 3")
                     if data[4][0] != i + 1:
                         badges[0] = i + 1
-                        print("update")
                         c.execute("UPDATE userxp SET badges[0] = 0 WHERE badges[0] > 0;")
                         conn.commit()
                         for j in range(len(top)):

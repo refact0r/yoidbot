@@ -86,7 +86,7 @@ class minecraft(commands.Cog):
             c.execute("SELECT * FROM userxp WHERE id = %s;", (ctx.author.id,))
             userdata = c.fetchone()
             if not userdata:
-                await ctx.send("Please folow format: `y.skin {username}`")
+                await ctx.send("Please follow format: `y.skin {username}`")
                 return
             uuid = userdata[6]
             username = userdata[5]
@@ -108,7 +108,7 @@ class minecraft(commands.Cog):
     @skin.error
     async def skin_error(self, ctx, error):
         print(error)
-        await ctx.send("Please folow format: `y.skin {username}`")
+        await ctx.send("Please follow format: `y.skin {username}`")
 
     @commands.command(aliases = ['lmc', 'linkmc'])
     async def linkminecraft(self, ctx, username):
@@ -124,7 +124,7 @@ class minecraft(commands.Cog):
     @linkminecraft.error
     async def linkminecraft_error(self, ctx, error):
         print(error)
-        await ctx.send("Please folow format: `y.linkmc {username}`")
+        await ctx.send("Please follow format: `y.linkmc {username}`")
 
     @commands.command(aliases = ['ulmc', 'unlinkmc'])
     async def unlinkminecraft(self, ctx):
