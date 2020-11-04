@@ -31,7 +31,7 @@ class minecraft(commands.Cog):
             title = "bucketcraft",
             color = ctx.author.color,
         )
-        embed.set_thumbnail(url = "https://api.mcsrvstat.us/icon/bucketcraftvr.us.to")
+        embed.set_thumbnail(url = "https://api.mcsrvstat.us/icon/bucketcraftsmp.us.to")
         if data['online']:
             embed.add_field(name = "Status", value = ":green_circle: Online")
             embed.add_field(name = "Players Online", value = f"{data['players']['online']}/{data['players']['max']}")

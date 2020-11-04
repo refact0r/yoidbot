@@ -411,70 +411,76 @@ class hypixel(commands.Cog):
                 return 0
         stats = ''
         otherstats = ''
-        prefixes = {
-            'wins': '_wins',
-            'losses': '_losses',
-        }
-        postfixes = {
-            'winstreak': 'current_winstreak_mode_',
-            'best_winstreak': 'best_winstreak_mode_'
-        }
-        def add_mode(mode):
-            for item in prefixes:
-                prefixes[item] = mode + prefixes[item]
-            for item in postfixes:
-                postfixes[item] = postfixes[item] + mode
-        def add_kills_stats(mode):
-            k = get(mode + '_kills')
-            d = get(mode + '_deaths')
+        overall = ''
+        modes = ['']
+        kills_modes = ['']
+        if not gamemode:
+            await msg.edit(content = "Please follow format: `y.duels {username} {gamemode}`")
+            return
+        elif gamemode in gamemodes[0]:
+            embed.description = 'Classic Duels'
+            modes = ['classic_duel']
+        elif gamemode in gamemodes[1]:
+            embed.description = 'Bow Duels'
+            modes = ['bow_duel']
+        elif gamemode in gamemodes[2]:
+            embed.description = 'Sumo Duels'
+            modes = ['sumo_duel']
+        elif gamemode in gamemodes[3]:
+            embed.description = 'Bridge Overall'
+            modes = ['bridge_duel', 'bridge_doubles', 'bridge_four', 'bridge_2v2v2v2', 'bridge_3v3v3v3']
+            kills_modes = ['bridge']
+        elif gamemode in gamemodes[4]:
+            embed.description = 'Bridge 1v1'
+            modes = ['bridge_duel']
+            kills_modes = ['bridge_duel_bridge']
+        elif gamemode in gamemodes[5]:
+            embed.description = 'Bridge 2v2'
+            modes = ['bridge_doubles']
+            kills_modes = ['bridge_doubles_bridge']
+        elif gamemode in gamemodes[6]:
+            embed.description = 'Bridge 4v4'
+            modes = ['bridge_four']
+            kills_modes = ['bridge_four_bridge']
+        elif gamemode in gamemodes[7]:
+            embed.description = 'UHC Overall'
+            modes = ['uhc_duel', 'uhc_doubles', 'uhc_four', 'uhc_meetup']
+            kills_modes = ['uhc_duel', 'uhc_doubles', 'uhc_four', 'uhc_meetup']
+        elif gamemode in gamemodes[8]:
+            embed.description = 'UHC 1v1'
+            modes = ['uhc_duel']
+        elif gamemode in gamemodes[9]:
+            embed.description = 'UHC 2v2'
+            modes = ['uhc_doubles']
+            kills_modes = ['uhc_doubles']
+        elif gamemode in gamemodes[10]:
+            embed.description = 'UHC 4v4'
+            modes = ['uhc_four']
+            kills_modes = ['uhc_four']
+        else:
+            await msg.edit(content = "Please enter a valid gamemode.")
+            return
+        w, l = 0, 0
+        for m in modes:
+            w += get(m + '_wins')
+            l += get(m + '_losses')
+        embed.add_field(name = 'Games Played', value = w + l)
+        if overall:
+            embed.add_field(name = 'Winstreak', value = get('current_' + modes[0].split('_')[0] + '_winstreak'))
+            embed.add_field(name = 'Best Winstreak', value = get('best_' + modes[0].split('_')[0] + '_winstreak'))
+        else:
+            embed.add_field(name = 'Winstreak', value = get('current_winstreak_mode_' + modes[0]))
+            embed.add_field(name = 'Best Winstreak', value = get('best_winstreak_mode_' + modes[0]))
+        if kills_modes:
+            k, d = 0, 0
+            for m in kills_modes:
+                k += get(m + '_kills')
+                d += get(m + '_deaths')
             if d != 0:
                 kdr = '{:.2f}'.format(k/d)
             else:
                 kdr = k
-            return f"**{k}** kills | **{d}** deaths | **{kdr}** KDR\n"
-        if not gamemode:
-            await msg.edit(content = "Please follow format: `y.duels {username} {gamemode}`")
-            return
-        elif gamemode in modes[0]:
-            embed.description = 'Classic Duels'
-            add_mode('classic_duel')
-        elif gamemode in modes[1]:
-            embed.description = 'Bridge 1v1'
-            add_mode('bridge_duel')
-            stats += add_kills_stats('bridge_duel_bridge')
-        elif gamemode in modes[2]:
-            embed.description = 'Bridge 2v2'
-            add_mode('bridge_doubles')
-            stats += add_kills_stats('bridge_doubles_bridge')
-        elif gamemode in modes[3]:
-            embed.description = 'Bridge 4v4'
-            add_mode('bridge_four')
-            stats += add_kills_stats('bridge_four_bridge')
-        elif gamemode in modes[4]:
-            embed.description = 'UHC 1v1'
-            add_mode('uhc_duel')
-        elif gamemode in modes[5]:
-            embed.description = 'UHC 2v2'
-            add_mode('uhc_doubles')
-            stats += add_kills_stats('uhc_doubles')
-        elif gamemode in modes[6]:
-            embed.description = 'UHC 4v4'
-            add_mode('uhc_four')
-            stats += add_kills_stats('uhc_four')
-        elif gamemode in modes[7]:
-            embed.description = 'Bow Duels'
-            add_mode('bow_duel')
-        elif gamemode in modes[8]:
-            embed.description = 'Sumo Duels'
-            add_mode('sumo_duel')
-        else:
-            await msg.edit(content = "Please enter a valid gamemode.")
-            return
-        embed.add_field(name = 'Winstreak', value = get(postfixes['winstreak']))
-        embed.add_field(name = 'Best Winstreak', value = get(postfixes['best_winstreak']))
-        w = get(prefixes['wins'])
-        l = get(prefixes['losses'])
-        embed.add_field(name = 'Games Played', value = w + l)
+            stats += f"**{k}** kills | **{d}** deaths | **{kdr}** KDR\n"
         if l != 0:
             wlr = '{:.2f}'.format(w/l)
         else:
@@ -483,7 +489,7 @@ class hypixel(commands.Cog):
         embed.add_field(name = 'Stats', value = stats, inline = False)
         await msg.edit(content = '', embed = embed)
 
-    @skywars.error
+    @duels.error
     async def duels_error(self, ctx, error):
         print(error)
         if type(error) == discord.ext.commands.errors.CommandInvokeError:
