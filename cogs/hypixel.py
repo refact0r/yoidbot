@@ -383,14 +383,14 @@ class hypixel(commands.Cog):
                     gamemode = ''.join(args[1:])
             else:
                 if len(args) > 1:
-                    if any(''.join(args) in mode for mode in modes):
+                    if any(''.join(args) in mode for mode in gamemodes):
                         player = userdata[5]
                         gamemode = ''.join(args)
                     else:
                         player = args[0]
                         gamemode = ''.join(args[1:])
                 else:
-                    if any(''.join(args) in mode for mode in modes):
+                    if any(''.join(args) in mode for mode in gamemodes):
                         player = userdata[5]
                         gamemode = ''.join(args)
                     else:
