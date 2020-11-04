@@ -349,7 +349,7 @@ class hypixel(commands.Cog):
     @commands.command(aliases = ['d', 'duelsstats', 'duel'])
     async def duels(self, ctx, *, input = None):
         msg = await ctx.send("Loading...")
-        modes = [
+        gamemodes = [
             ['classic', 'c'],
             ['bridge', 'bridge1', 'bridge1v1', 'br', 'br1', 'bridgesolo'],
             ['bridge2', 'bridge2v2', 'br2', 'bridgedoubles'],
