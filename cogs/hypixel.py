@@ -478,6 +478,9 @@ class hypixel(commands.Cog):
             for m in kills_modes:
                 k += get(m + '_kills')
                 d += get(m + '_deaths')
+                if m == 'uhc_duel':
+                    k += get(m + '_wins')
+                    d += get(m + '_wins')
             if d != 0:
                 kdr = '{:.2f}'.format(k/d)
             else:
