@@ -178,7 +178,7 @@ async def help(ctx, command = None):
 			color = ctx.author.color,
 			description = "Use the reactions below to go to the next page.\nIf you want to get further help, report issues, or suggest new ideas, join the Yoidbot discord: https://discord.gg/NPVFbnF"
 		)
-		embed.set_thumbnail("https://i.imgur.com/0GEBD3t.png")
+		embed.set_thumbnail(url = "https://i.imgur.com/0GEBD3t.png")
 		for category in page:
 			commands = ''
 			for c in data[category]['commands']:
