@@ -39,6 +39,9 @@ class moderation(commands.Cog):
             msg = await ctx.send(f"Resetting all nicks... (This may take a while)")
         else:
             msg = await ctx.send(f"Nicknaming everyone to {args}... (This may take a while)")
+        if len(ctx.guild.members) > 50:
+            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
+            return
         for p in ctx.guild.members:
             try:
                 await p.edit(nick = args)
@@ -120,6 +123,7 @@ class moderation(commands.Cog):
             await ctx.send("You do not have the permissions to use this command.")
             return
         await ctx.send("All non-admins were muted.")
+        found = False
         for r in ctx.guild.roles:
             if r.name == "Muted" and not r.permissions.send_messages:
                 role = r
@@ -127,6 +131,9 @@ class moderation(commands.Cog):
         if not found:
             perms = discord.Permissions(send_messages = False)
             role = await ctx.guild.create_role(name = "Muted", permissions = perms)
+        if len(ctx.guild.members) > 50:
+            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
+            return
         for p in ctx.guild.members:
             try:
                 await p.add_roles(role)
@@ -139,6 +146,7 @@ class moderation(commands.Cog):
             await ctx.send("You do not have the permissions to use this command.")
             return
         await ctx.send("All muted members were unmuted.")
+        found = False
         for r in ctx.guild.roles:
             if r.name == "Muted" and not r.permissions.send_messages:
                 role = r
@@ -146,6 +154,9 @@ class moderation(commands.Cog):
         if not found:
             perms = discord.Permissions(send_messages = False)
             role = await ctx.guild.create_role(name = "Muted", permissions = perms)
+        if len(ctx.guild.members) > 50:
+            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
+            return
         for m in ctx.guild.members:
             for n in m.roles:
                 if n == role:
