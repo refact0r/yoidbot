@@ -414,8 +414,8 @@ class hypixel(commands.Cog):
         stats = ''
         otherstats = ''
         overall = ''
-        modes = ['']
-        kills_modes = ['']
+        modes = ''
+        kills_modes = ''
         if not gamemode:
             await msg.edit(content = "Please follow format: `y.duels {username} {gamemode}`")
             return
