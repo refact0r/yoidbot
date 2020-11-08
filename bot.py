@@ -43,6 +43,7 @@ async def determine_prefix(bot, message):
 
 intents = discord.Intents.default()
 intents.members = True
+intents.presences = True
 client = commands.Bot(command_prefix = determine_prefix, intents = intents)
 
 for file in os.listdir('./cogs'):
