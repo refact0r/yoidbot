@@ -78,6 +78,7 @@ class minecraft(commands.Cog):
 
     @mcserver.error
     async def mcserver_error(self, ctx, error):
+        print(error)
         await ctx.send("Please follow format: `y.server {ip}`")
 
     @commands.command(aliases = ['mcskin', 'minecraft skin'])

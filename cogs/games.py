@@ -462,7 +462,6 @@ class games(commands.Cog):
                         content = msg.content
                         if content == 'end_game':
                             await ctx.send('Game ended.')
-                            print(counter)
                             return
                         valid = True
                     await msg.delete()

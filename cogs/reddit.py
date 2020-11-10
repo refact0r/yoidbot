@@ -41,6 +41,11 @@ class reddit(commands.Cog):
             await ctx.send(embed = embed)
             await ctx.send(submission.url)
 
+    @meme.error
+    async def meme_error(self, ctx, error):
+        print(error)
+        await ctx.send("Please follow format: `y.meme {subreddit}`")
+
     @commands.command(aliases = ['frie', 'f'])
     async def fries(self, ctx):
         submissions = []
@@ -62,6 +67,11 @@ class reddit(commands.Cog):
         else:
             await ctx.send(embed = embed)
             await ctx.send(submission.url)
+
+    @fries.error
+    async def fries_error(self, ctx, error):
+        print(error)
+        await ctx.send("Please follow format: `y.fries {subreddit}`")
 
     @commands.command(aliases = ['r', 'reddi', 'redd', 'red', 're'])
     async def reddit(self, ctx, subreddit):
@@ -108,6 +118,7 @@ class reddit(commands.Cog):
 
     @reddit.error
     async def reddit_error(self, ctx, error):
+        print(error)
         await ctx.send("Please follow format: `y.reddit {subreddit}`")
         
 def setup(client):

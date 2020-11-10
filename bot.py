@@ -79,6 +79,7 @@ async def addprefix(ctx, *, prefix):
 
 @addprefix.error
 async def addprefix_error(ctx, error):
+	print(error)
 	if type(error) == discord.ext.commands.errors.MissingPermissions:
 		await ctx.send("You do not have the permissions to use this command.")
 	else:	
@@ -110,6 +111,7 @@ async def removeprefix(ctx, *, prefix):
 
 @removeprefix.error
 async def removeprefix_error(ctx, error):
+	print(error)
 	if type(error) == discord.ext.commands.errors.MissingPermissions:
 		await ctx.send("You do not have the permissions to use this command.")
 	else:	
@@ -256,6 +258,7 @@ async def say(ctx, *, message):
 
 @say.error
 async def say_error(ctx, error):
+	print(error)
 	await ctx.send('Please follow format: `y.say {message}`')
 
 @client.command(aliases = ['sp'])
@@ -269,6 +272,7 @@ async def spam(ctx, *, message):
 
 @spam.error
 async def spam_error(ctx, error):
+	print(error)
 	await ctx.send('Please follow format: `y.spam {message} {amount}`')
 
 @client.command(aliases = ['8ball', '8b'])
@@ -346,6 +350,7 @@ async def wiki(ctx, *, subject):
 
 @wiki.error
 async def wiki_error(ctx, error):
+	print(error)
 	await ctx.send("Please follow format: `y.wikipedia {subject}`")
 
 @client.command(aliases = ['server', 'si'])

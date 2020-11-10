@@ -8,11 +8,6 @@ import typing
 DATABASE_URL = os.getenv('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 c = conn.cursor()
-#c.execute("UPDATE userxp SET badges = '{1, 8}' WHERE name = '<y>';")
-conn.commit()
-c.execute("SELECT * FROM userxp WHERE name = '<y>';")
-print(c.fetchone())
-c.execute("SELECT * FROM userxp ORDER BY xp DESC LIMIT 3;")
 third = c.fetchall()[2][2]
 
 class levels(commands.Cog):
@@ -185,7 +180,6 @@ class levels(commands.Cog):
             author = ctx.author
         c.execute("SELECT * FROM userxp WHERE id = %s;", (author.id,))
         data = c.fetchone()
-        print(data)
         if not data:
             c.execute("INSERT INTO userxp VALUES (%s, %s, %s, %s);", (author.id, author.name, 1, 0))
             conn.commit()

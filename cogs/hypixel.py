@@ -554,6 +554,7 @@ class hypixel(commands.Cog):
 
     @hypixelflist.error
     async def hypxielflist_error(self, ctx, error):
+        print(error)
         if type(error) == discord.ext.commands.errors.CommandInvokeError:
             await ctx.send("Could not get data.")
         else:
