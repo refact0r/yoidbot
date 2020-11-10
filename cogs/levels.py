@@ -70,7 +70,7 @@ class levels(commands.Cog):
         if badge_id:
             level_badge = self.level_badges[badge_id - 1][0]
         if level != data[3]:
-            congrat_string = f"Congratulations {msg.author.display_name}, you are now level {level}!"
+            congrat_string = f"Congratulations **{msg.author.display_name}**, you are now level **{level}**!"
             if badge_id != data[4][1]:
                 congrat_string += f" You also earned the badge {level_badge}"
             await msg.channel.send(congrat_string)
