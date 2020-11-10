@@ -46,6 +46,7 @@ class games(commands.Cog):
     @commands.cooldown(5, 30, commands.BucketType.channel)
     @commands.max_concurrency(1, commands.BucketType.channel, wait = False)
     async def trivia(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         data = requests.get(f'https://opentdb.com/api.php?amount=1').json()
         results = data['results'][0]
         embed = discord.Embed(
@@ -115,6 +116,7 @@ class games(commands.Cog):
     #@commands.max_concurrency(1, commands.BucketType.channel, wait = False)
     @commands.command(aliases = ['hang', 'hm'])
     async def hangman(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         with open('words3.txt') as f:
             word = random.choice(f.readlines()).rstrip("\n")
         hang = [
@@ -189,6 +191,7 @@ class games(commands.Cog):
 
     @commands.command(aliases = ['ttt'])
     async def tictactoe(self, ctx, *, opponent: discord.Member):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if opponent.id == ctx.author.id:
             await ctx.send("You played yourself. Oh wait, you can't.")
             return
@@ -295,6 +298,7 @@ class games(commands.Cog):
     @commands.command(aliases = ['2048'])
     @commands.max_concurrency(1, commands.BucketType.channel, wait = False)
     async def twentyfortyeight(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         available_commands = ['w', 'a', 's', 'd', 'end_game']
         await ctx.send('2048 has started. Use WASD keys to move. Type "end_game" to end the game.')
         

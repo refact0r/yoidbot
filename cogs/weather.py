@@ -16,6 +16,7 @@ class weather(commands.Cog):
 
     @commands.command()
     async def weather(self, ctx, *, location):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         ' '.join(location)
         mgr = owm.weather_manager()
         observe = mgr.weather_at_place(location)

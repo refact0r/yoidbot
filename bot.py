@@ -63,6 +63,7 @@ async def on_ready():
 @commands.has_permissions(manage_guild = True)
 @commands.guild_only()
 async def addprefix(ctx, *, prefix):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	' '.join(prefix)
 	if prefix[0] == '"' and prefix[-1] == '"':
 		prefix = prefix[1:-1]
@@ -89,6 +90,7 @@ async def addprefix_error(ctx, error):
 @commands.has_permissions(manage_guild = True)
 @commands.guild_only()
 async def removeprefix(ctx, *, prefix):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	' '.join(prefix)
 	if prefix[0] == '"' and prefix[-1] == '"':
 		prefix = prefix[1:-1]
@@ -120,6 +122,7 @@ async def removeprefix_error(ctx, error):
 @client.command(aliases = ['pr'])
 @commands.guild_only()
 async def prefixes(ctx):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	c.execute("SELECT * FROM guilds WHERE guild_id = %s;", (ctx.guild.id,))
 	data = c.fetchone()
 	prefixes = ''
@@ -146,6 +149,7 @@ async def shutdown(ctx):
 
 @client.command(aliases = ['h'])
 async def help(ctx, command = None):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	file = open('help.json', 'r')
 	data = json.load(file)
 	if command:
@@ -223,10 +227,12 @@ async def help(ctx, command = None):
 
 @client.command()
 async def hi(ctx):
-    await ctx.send(f'Hello, {ctx.author.display_name}!')
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
+	await ctx.send(f'Hello, {ctx.author.display_name}!')
 
 @client.command()
 async def invite(ctx):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	await ctx.send("https://discord.com/api/oauth2/authorize?client_id=680466714777223183&permissions=8&scope=bot")
 
 '''
@@ -254,6 +260,7 @@ async def pingleaderboard(ctx):
 
 @client.command(aliases = ['s'])
 async def say(ctx, *, message):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	await ctx.send(f'{message}')
 
 @say.error
@@ -263,6 +270,7 @@ async def say_error(ctx, error):
 
 @client.command(aliases = ['sp'])
 async def spam(ctx, *, message):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	s = message.split()
 	if int(s[-1]) > 20:
 		await ctx.send('You cannot spam that much.')
@@ -277,6 +285,7 @@ async def spam_error(ctx, error):
 
 @client.command(aliases = ['8ball', '8b'])
 async def eightball(ctx):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	answers = [
 		"As I see it, yes.",
 		"Ask again later.",
@@ -303,6 +312,7 @@ async def eightball(ctx):
 
 @client.command(aliases = ['cf'])
 async def coinflip(ctx):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	rand = random.randint(0, 1)
 	if rand:
 		await ctx.send("Heads!")
@@ -311,6 +321,7 @@ async def coinflip(ctx):
 
 @client.command()
 async def speakthetruth(ctx):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	truth = [
 		'subscribe to https://www.youtube.com/channel/UCbpHaJIAapKyQGT8qleP2lg',
 		'subscribe to https://www.youtube.com/channel/UCEANNnWCyRCbkk-DHEMbgtA',
@@ -321,6 +332,7 @@ async def speakthetruth(ctx):
 
 @client.command(aliases = ['wikipedia', 'w'])
 async def wiki(ctx, *, subject):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	' '.join(subject)
 	suggest = wikipedia.suggest(subject)
 	if not suggest:
@@ -355,6 +367,7 @@ async def wiki_error(ctx, error):
 
 @client.command(aliases = ['server', 'si'])
 async def serverinfo(ctx):
+	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	embed = discord.Embed(
 		title = f":desktop:  {ctx.guild.name} info",
 		color = ctx.author.color,
@@ -374,13 +387,7 @@ async def serverinfo(ctx):
 	embed.add_field(name = ":wrench:  Server Type", value = public, inline = False)
 	if ctx.guild.premium_subscription_count:
 		embed.add_field(name = ":gem:  Nitro Level", value = f"Level {ctx.guild.premium_tier} ({ctx.guild.premium_subscription_count} boosts)")
-	total = 0
-	member = 0
-	bot = 0
-	online = 0
-	dnd = 0
-	idle = 0
-	offline = 0
+	total, member, bot, online, dnd, idle, offline = 0, 0, 0, 0, 0, 0, 0
 	for m in ctx.guild.members:
 		total += 1
 		if m.bot:

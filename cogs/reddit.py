@@ -17,6 +17,7 @@ class reddit(commands.Cog):
 
     @commands.command(aliases = ['me', 'mem', 'mme', 'meem'])
     async def meme(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         submissions = []
         i = random.randint(1, 200)
         submissions = list(r.subreddit("dankmemes").hot(limit=i))
@@ -48,6 +49,7 @@ class reddit(commands.Cog):
 
     @commands.command(aliases = ['frie', 'f'])
     async def fries(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         submissions = []
         for submission in r.subreddit("foodporn+food").search("title:fries", limit = 100):
             if submission.score > 100:
@@ -75,6 +77,7 @@ class reddit(commands.Cog):
 
     @commands.command(aliases = ['r', 'reddi', 'redd', 'red', 're'])
     async def reddit(self, ctx, subreddit):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         submissions = []
         def check_subreddit(subreddit):
             valid = True

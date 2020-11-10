@@ -33,6 +33,7 @@ class hypixel(commands.Cog):
 
     @commands.command(aliases = ['hypixelstats', 'hs', 'hp'])
     async def hypixel(self, ctx, player = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         if not player:
             c.execute("SELECT * FROM userxp WHERE id = %s;", (ctx.author.id,))
@@ -93,6 +94,7 @@ class hypixel(commands.Cog):
 
     @commands.command(aliases = ['bedwarsstats', 'bw'])
     async def bedwars(self, ctx, *, input = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         modes = [
             ['solos', 'solo', '1', 's'],
@@ -225,6 +227,7 @@ class hypixel(commands.Cog):
 
     @commands.command(aliases = ['skywarsstats', 'sw'])
     async def skywars(self, ctx, *, input = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         modes = [
             ['solonormal', 'solosnormal', 'sn', '1n'],
@@ -348,6 +351,7 @@ class hypixel(commands.Cog):
 
     @commands.command(aliases = ['d', 'duelsstats', 'duel'])
     async def duels(self, ctx, *, input = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         gamemodes = [
             ['classic', 'c'],
@@ -504,6 +508,7 @@ class hypixel(commands.Cog):
     
     @commands.command(aliases = ['flist', 'hypixelfriends', 'hfl'])
     async def hypixelflist(self, ctx, player = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         if not player:
             c.execute("SELECT * FROM userxp WHERE id = %s;", (ctx.author.id,))
@@ -562,6 +567,7 @@ class hypixel(commands.Cog):
 
     @commands.command(aliases = ['sb', 'skyblock'])
     async def skyblockstats(self, ctx, *, input = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         cute_names = [
             "Apple",
@@ -685,6 +691,7 @@ class hypixel(commands.Cog):
         print(error)
         await ctx.send("Please follow format: `y.skyblockstats {username} {profile(optional)}`")
 
+    '''
     @commands.command(aliases = ['sb2', 'skyblock2'])
     async def skyblockstats2(self, ctx, *, input = None):
         msg = await ctx.send("Loading...")
@@ -804,6 +811,7 @@ class hypixel(commands.Cog):
                 else:
                     embed.add_field(name = stats[s], value = profile['data']['stats'][s])
         await msg.edit(content = '', embed = embed)
+    '''
 
 def setup(client):
     client.add_cog(hypixel(client))

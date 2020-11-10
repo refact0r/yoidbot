@@ -103,6 +103,7 @@ class levels(commands.Cog):
 
     @commands.command(aliases = ['lb'])
     async def leaderboard(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         c.execute("SELECT * FROM userxp ORDER BY xp DESC;")
         all = c.fetchall()
         content = ''
@@ -141,6 +142,7 @@ class levels(commands.Cog):
 
     @commands.command(aliases = ['glb'])
     async def globalleaderboard(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         c.execute("SELECT * FROM userxp ORDER BY xp DESC;")
         all = c.fetchall()
         content = ''
@@ -177,6 +179,7 @@ class levels(commands.Cog):
 
     @commands.command(aliases = ['lvl'])
     async def level(self, ctx, *, author: typing.Optional[discord.Member] = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not author:
             author = ctx.author
         c.execute("SELECT * FROM userxp WHERE id = %s;", (author.id,))
@@ -216,8 +219,9 @@ class levels(commands.Cog):
         embed.set_thumbnail(url = author.avatar_url)
         await ctx.send(embed = embed)
 
-    @commands.command(aliases = ['badges'])
-    async def badge(self, ctx):
+    @commands.command()
+    async def badges(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         embed = discord.Embed(
             title = "All Badges",
             color = ctx.author.color

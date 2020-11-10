@@ -11,6 +11,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['nick', 'n'])
     async def nickname(self, ctx, member: discord.Member, *, nick = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.manage_nicknames:
             await ctx.send("You do not have the permissions to use this command.")
             return
@@ -32,6 +33,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['na', 'nicknameall'])
     async def nickall(self, ctx, *, args = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You do not have the permissions to use this command.")
             return
@@ -56,6 +58,7 @@ class moderation(commands.Cog):
        
     @commands.command(aliases = ['c', 'purge'])
     async def clear(self, ctx, amount):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not amount.isdigit():
             await ctx.send("Please follow format: `y.clear {amount}`")
             return
@@ -71,6 +74,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['m'])
     async def mute(self, ctx, *, member):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.manage_permissions:
             await ctx.send("You do not have the permissions to use this command.")
             return
@@ -99,6 +103,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['um'])
     async def unmute(self, ctx, *, member):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.manage_permissions:
             await ctx.send("You do not have the permissions to use this command.")
             return
@@ -119,6 +124,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['ma'])
     async def muteall(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You do not have the permissions to use this command.")
             return
@@ -142,6 +148,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['uma'])
     async def unmuteall(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You do not have the permissions to use this command.")
             return
@@ -165,6 +172,7 @@ class moderation(commands.Cog):
 
     @commands.command(aliases = ['k', 'yoink'])
     async def kick(self, ctx, *, bad_person):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not ctx.author.guild_permissions.kick_members:
             await ctx.send("You do not have the permissions to use this command.")
             return

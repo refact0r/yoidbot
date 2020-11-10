@@ -25,6 +25,7 @@ class minecraft(commands.Cog):
     @commands.command(aliases = ['bucket', 'bc', 'bcv'])
     @is_in_guild(710654601304473610)
     async def bucketcraft(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         data = requests.get("https://api.mcsrvstat.us/2/bucketcraftsmp.us.to").json()
         embed = discord.Embed(
@@ -48,6 +49,7 @@ class minecraft(commands.Cog):
 
     @commands.command(aliases = ['mc', 'mcs', 'minecraftserver'])
     async def mcserver(self, ctx, ip):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
         data = requests.get(f"https://api.mcsrvstat.us/2/{ip}").json()
         if not data['ip']:
@@ -83,6 +85,7 @@ class minecraft(commands.Cog):
 
     @commands.command(aliases = ['mcskin', 'minecraft skin'])
     async def skin(self, ctx, username = None):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         if not username:
             c.execute("SELECT * FROM userxp WHERE id = %s;", (ctx.author.id,))
             userdata = c.fetchone()
@@ -113,6 +116,7 @@ class minecraft(commands.Cog):
 
     @commands.command(aliases = ['lmc', 'linkmc'])
     async def linkminecraft(self, ctx, username):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         data = requests.get(f"https://api.mojang.com/users/profiles/minecraft/{username}")
         if data.status_code != requests.codes.ok:
             await ctx.send("Player not found.")
@@ -129,6 +133,7 @@ class minecraft(commands.Cog):
 
     @commands.command(aliases = ['ulmc', 'unlinkmc'])
     async def unlinkminecraft(self, ctx):
+        print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         c.execute("UPDATE userxp SET mc_username = null, mc_uuid = null WHERE id = %s;",(ctx.author.id,))
         conn.commit()
         await ctx.send(f"Minecraft account unlinked.")
