@@ -15,16 +15,23 @@ class moderation(commands.Cog):
         if not ctx.author.guild_permissions.manage_nicknames:
             await ctx.send("You do not have the permissions to use this command.")
             return
+        if nick and len(nick) < 2:
+            await ctx.send("That nickname is too short. It must be 2 characters or more.")
+            return
+        if nick and len(nick) > 32:
+            await ctx.send("That nickname is too long. It must be 32 characters or less.")
+            return
         previous_name = member.display_name
         try:
             await member.edit(nick = nick)
-        except:
-            await ctx.send("I cannot nick this member.")
+        except Exception:
+            print(Exception)
+            await ctx.send("I cannot nickname this member.")
             return
         if not nick:
-            await ctx.send(f"{previous_name}'s nick was reset.")
+            await ctx.send(f"{previous_name}'s nickname was reset.")
         else:
-            await ctx.send(f"{previous_name} was nicked {nick}.")
+            await ctx.send(f"{previous_name} was nicknamed {nick}.")
 
     @nickname.error
     async def nickname_error(self, ctx, error):
@@ -37,19 +44,29 @@ class moderation(commands.Cog):
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You do not have the permissions to use this command.")
             return
+        if len(ctx.guild.members) > 50:
+            await ctx.send("Nickall cannot be used on guilds with over 50 members.")
+            return
         if not args:
             msg = await ctx.send(f"Resetting all nicks... (This may take a while)")
         else:
+            if len(args) < 2:
+                await ctx.send("That nickname is too short. It must be 2 characters or more.")
+                return
+            if len(args) > 32:
+                await ctx.send("That nickname is too long. It must be 32 characters or less.")
+                return
             msg = await ctx.send(f"Nicknaming everyone to {args}... (This may take a while)")
-        if len(ctx.guild.members) > 50:
-            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
-            return
         for p in ctx.guild.members:
             try:
                 await p.edit(nick = args)
-            except:
+            except Exception:
+                print(Exception)
                 pass
-        await msg.edit(content = "Done!")
+        if args:
+            await msg.edit(content = f"All members were nicknamed {args}.")
+        else:
+            await msg.edit(content = f"All nicks were reset.")
 
     @nickall.error
     async def nickall_error(self, ctx, error):
@@ -81,11 +98,12 @@ class moderation(commands.Cog):
         converter = MemberConverter()
         try:
             member = await converter.convert(ctx, member)
-        except:
+        except Exception:
+            print(Exception)
             await ctx.send("Member not found.")
             return
-        await ctx.send(member.display_name + ' was muted.')
         found = False
+        role = None
         for r in ctx.guild.roles:
             if r.name == "Muted":
                 role = r
@@ -95,6 +113,7 @@ class moderation(commands.Cog):
             for channel in ctx.guild.channels:
                 await channel.set_permissions(role, send_messages = False)
         await member.add_roles(role)
+        await ctx.send(member.display_name + ' was muted.')
 
     @mute.error
     async def mute_error(self, ctx, error):
@@ -110,12 +129,13 @@ class moderation(commands.Cog):
         converter = MemberConverter()
         try:
             member = await converter.convert(ctx, member)
-        except:
+        except Exception:
+            print(Exception)
             await ctx.send("Member not found.")
             return
-        await ctx.send(member.display_name + ' was unmuted.')
         role = discord.utils.get(member.guild.roles, name = "Muted")
         await member.remove_roles(role)
+        await ctx.send(member.display_name + ' was unmuted.')
 
     @unmute.error
     async def unmute_error(self, ctx, error):
@@ -128,8 +148,12 @@ class moderation(commands.Cog):
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You do not have the permissions to use this command.")
             return
-        await ctx.send("All non-admins were muted.")
+        if len(ctx.guild.members) > 50:
+            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
+            return
+        msg = await ctx.send("Muting all members... (This may take a while)")
         found = False
+        role = None
         for r in ctx.guild.roles:
             if r.name == "Muted" and not r.permissions.send_messages:
                 role = r
@@ -137,14 +161,13 @@ class moderation(commands.Cog):
         if not found:
             perms = discord.Permissions(send_messages = False)
             role = await ctx.guild.create_role(name = "Muted", permissions = perms)
-        if len(ctx.guild.members) > 50:
-            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
-            return
         for p in ctx.guild.members:
             try:
                 await p.add_roles(role)
-            except:
+            except Exception:
+                print(Exception)
                 pass
+        await msg.edit(content = "All members were muted.")
 
     @commands.command(aliases = ['uma'])
     async def unmuteall(self, ctx):
@@ -152,8 +175,12 @@ class moderation(commands.Cog):
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You do not have the permissions to use this command.")
             return
-        await ctx.send("All muted members were unmuted.")
+        if len(ctx.guild.members) > 50:
+            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
+            return
+        msg = await ctx.send("Unmuting all members... (This may take a while)")
         found = False
+        role = None
         for r in ctx.guild.roles:
             if r.name == "Muted" and not r.permissions.send_messages:
                 role = r
@@ -161,14 +188,12 @@ class moderation(commands.Cog):
         if not found:
             perms = discord.Permissions(send_messages = False)
             role = await ctx.guild.create_role(name = "Muted", permissions = perms)
-        if len(ctx.guild.members) > 50:
-            await ctx.send("Muteall cannot be used on guilds with over 50 members.")
-            return
         for m in ctx.guild.members:
             for n in m.roles:
                 if n == role:
                     await m.remove_roles(n)
                     break
+        await msg.edit(content = "All members were unmuted.")
 
     @commands.command(aliases = ['k', 'yoink'])
     async def kick(self, ctx, *, bad_person):
@@ -179,12 +204,14 @@ class moderation(commands.Cog):
         converter = MemberConverter()
         try:
             member = await converter.convert(ctx, bad_person)
-        except:
+        except Exception:
+            print(Exception)
             await ctx.send("Member not found.")
             return
         try:
             await member.guild.kick(member)
-        except:
+        except Exception:
+            print(Exception)
             await ctx.send("I cannot kick this member.")
             return
         await ctx.send(member.display_name + ' was kicked.')
