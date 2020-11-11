@@ -439,15 +439,15 @@ class hypixel(commands.Cog):
         elif gamemode in gamemodes[4]:
             embed.description = 'Bridge 1v1'
             modes = ['bridge_duel']
-            kills_modes = ['bridge_duel_bridge']
+            kills_modes = ['bridge_duel_bridge', 'bridge_duel']
         elif gamemode in gamemodes[5]:
             embed.description = 'Bridge 2v2'
             modes = ['bridge_doubles']
-            kills_modes = ['bridge_doubles_bridge']
+            kills_modes = ['bridge_doubles_bridge', 'bridge_doubles']
         elif gamemode in gamemodes[6]:
             embed.description = 'Bridge 4v4'
             modes = ['bridge_four']
-            kills_modes = ['bridge_four_bridge']
+            kills_modes = ['bridge_four_bridge', 'bridge_four']
         elif gamemode in gamemodes[7]:
             embed.description = 'UHC Overall'
             modes = ['uhc_duel', 'uhc_doubles', 'uhc_four', 'uhc_meetup']
