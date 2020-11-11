@@ -212,7 +212,7 @@ class hypixel(commands.Cog):
         stats += f"**{b}** beds broken | **{bl}** beds lost | **{blr}** BLR\n"
         rc = get(keys['resources_collected'])
         ip = get(keys['items_purchased'])
-        stats2 = f"**{rc}** resources collected\n **{ip}** items purchased"
+        stats2 = f"**{rc}** resources collected\n**{ip}** items purchased"
         embed.add_field(name = 'General Stats', value = stats, inline = False)
         embed.add_field(name = 'Other Stats', value = stats2, inline = False)
         await msg.edit(content = '', embed = embed)

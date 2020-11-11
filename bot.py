@@ -235,7 +235,6 @@ async def invite(ctx):
 	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
 	await ctx.send("https://discord.com/api/oauth2/authorize?client_id=680466714777223183&permissions=8&scope=bot")
 
-'''
 @client.command(aliases = ['p'])
 async def ping(ctx):
 	before = time.monotonic()
@@ -256,7 +255,6 @@ async def pingleaderboard(ctx):
 	c.execute("SELECT * FROM ping ORDER BY type;")
 	data = c.fetchall()
 	await ctx.send(f'lowest: {data[0][1]}ms by {data[0][2]}\nhighest: {data[1][1]}ms by {data[1][2]}')
-'''
 
 @client.command(aliases = ['s'])
 async def say(ctx, *, message):
