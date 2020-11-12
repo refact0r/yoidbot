@@ -538,7 +538,7 @@ class hypixel(commands.Cog):
             if f_uuid == uuid:
                 f_uuid = f['uuidSender']
             if counter > 100:
-                await asyncio.sleep(60)
+                await time.sleep(60)
             friend = requests.get(f"https://api.hypixel.net/player?key={key}&uuid={f_uuid}").json()
             if 'player' not in friend:
                 continue
