@@ -325,6 +325,7 @@ async def speakthetruth(ctx):
 		'subscribe to https://www.youtube.com/channel/UCEANNnWCyRCbkk-DHEMbgtA',
 		'subscribe to https://www.youtube.com/channel/UCfjfrAYcwqXk13xeLZlftSw',
 		'subscribe to https://www.youtube.com/channel/UCQwgWTzqnHUPsWoOEbgJOZQ',
+		'subscribe to https://www.youtube.com/channel/UC4tlxtGBz_JV77dohCDFB2w'
 	]
 	await ctx.send(truth[random.randint(0, len(truth) - 1)])
 
