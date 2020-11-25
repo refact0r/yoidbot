@@ -63,15 +63,15 @@ deleted = {}
 
 @client.event
 async def on_message_delete(message):
-	deleted[message.guild.id] = message
+	deleted[message.channel.id] = message
 
 @client.command()
 @commands.guild_only()
 async def snipe(ctx):
-	if ctx.guild.id not in deleted:
+	if ctx.channel.id not in deleted:
 		await ctx.send("No messages to snipe.")
 		return
-	msg = deleted[ctx.guild.id]
+	msg = deleted[ctx.channel.id]
 	embed = discord.Embed(
 		description = msg.content,
 		timestamp = msg.created_at
