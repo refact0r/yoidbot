@@ -59,6 +59,26 @@ async def on_ready():
 	for guild in client.guilds:
 		print(guild.name)
 
+deleted = {}
+
+@client.event
+async def on_message_delete(message):
+	deleted[message.guild.id] = message
+
+@client.command()
+@commands.guild_only()
+async def snipe(ctx):
+	if ctx.guild.id not in deleted:
+		await ctx.send("No messages to snipe.")
+		return
+	msg = deleted[ctx.guild.id]
+	embed = discord.Embed(
+		description = msg.content,
+		timestamp = msg.created_at
+	)
+	embed.set_author(name = msg.author.name, icon_url = msg.author.avatar_url)
+	await ctx.send(embed = embed)
+
 @client.command(aliases = ['ap'])
 @commands.has_permissions(manage_guild = True)
 @commands.guild_only()
