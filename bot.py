@@ -174,28 +174,32 @@ async def help(ctx, command = None):
 	data = json.load(file)
 	if command:
 		for category in data:
-			if command in data[category]['commands']:
-				command_data = data[category]['commands'][command]
-				aliases = ''
+			for data_command in data[category]['commands']:
+				client_command = None
 				for c in client.commands:
-					if c.name == command or command in c.aliases:
-						for a in [c.name] + c.aliases:
-							if command != a:
-								aliases += f"`{a}`, "
-						break
-				embed = discord.Embed(
+					if c.name == data_command or data_command in c.aliases:
+						client_command = c
+				if not client.command:
+					continue
+				if command == data_command or command in client_command.aliases:
+					command_data = data[category]['commands'][data_command]
+					aliases = ''
+					for a in [client_command.name] + client_command.aliases:
+						if data_command != a:
+							aliases += f"`{a}`, "
+					embed = discord.Embed(
 					title = command,
 					color = ctx.author.color,
-				)
-				usage = ''
-				if command_data['usage']:
-					usage = ' ' + command_data['usage']
-				embed.add_field(name = "Usage", value = f"`y.{command}{usage}`", inline = False)
-				if aliases:
-					embed.add_field(name = "Other Names", value = aliases[:-2], inline = False)
-				embed.add_field(name = "Description", value = f"{command_data['long']}", inline = False)
-				await ctx.send(embed = embed)
-				return
+					)
+					usage = ''
+					if command_data['usage']:
+						usage = ' ' + command_data['usage']
+					embed.add_field(name = "Usage", value = f"`y.{command}{usage}`", inline = False)
+					if aliases:
+						embed.add_field(name = "Other Names", value = aliases[:-2], inline = False)
+					embed.add_field(name = "Description", value = f"{command_data['long']}", inline = False)
+					await ctx.send(embed = embed)
+					return
 		await ctx.send("Could not find that command.")
 		return
 	pages = [["Useful"], ["Levels", "Moderation", "Reddit"], ["Games", "Minecraft", "Hypixel"]]
