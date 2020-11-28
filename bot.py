@@ -188,13 +188,13 @@ async def help(ctx, command = None):
 						if data_command != a:
 							aliases += f"`{a}`, "
 					embed = discord.Embed(
-					title = command,
-					color = ctx.author.color,
+						title = data_command,
+						color = ctx.author.color,
 					)
 					usage = ''
 					if command_data['usage']:
 						usage = ' ' + command_data['usage']
-					embed.add_field(name = "Usage", value = f"`y.{command}{usage}`", inline = False)
+					embed.add_field(name = "Usage", value = f"`y.{data_command}{usage}`", inline = False)
 					if aliases:
 						embed.add_field(name = "Other Names", value = aliases[:-2], inline = False)
 					embed.add_field(name = "Description", value = f"{command_data['long']}", inline = False)
