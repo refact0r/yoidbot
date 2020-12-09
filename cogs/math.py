@@ -11,17 +11,22 @@ class math(commands.Cog):
 
     @commands.command(aliases = ['solve', 'calc'])
     async def calculate(self, ctx, *, expression):
-        exp = ''.join(expression)
+        exp = ''.join(c for c in expression if c in operators or c.isdigit())
+        print(exp)
         if len(exp) == 0:
-            await ctx.send("Invalid Expression")
+            await ctx.send("Invalid expression.")
             return
         result = self.helper(exp)[0]
         if result == float("inf"):
-            await ctx.send("Invalid Expression")
+            await ctx.send("Invalid expression.")
             return
         if isinstance(result, float) and result.is_integer():
             result = int(result)
         await ctx.send(result)
+
+    @calculate.error
+    async def calculate_error(self, ctx, error):
+        await ctx.send('Please follow format: `y.calculate {expression}`')
 
     def helper(self, exp):
         if len(exp) == 0:
