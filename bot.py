@@ -65,7 +65,7 @@ deleted = {}
 async def on_message_delete(message):
 	deleted[message.channel.id] = message
 
-@client.command()
+@client.command(aliases = ['sn'])
 @commands.guild_only()
 async def snipe(ctx):
 	if ctx.channel.id not in deleted:
@@ -76,9 +76,6 @@ async def snipe(ctx):
 		description = msg.content,
 		timestamp = msg.created_at
 	)
-	print(msg.attachments)
-	if len(msg.attachments) > 0:
-		embed.set_image(url = msg.attachments[0].url)
 	embed.set_author(name = msg.author.name, icon_url = msg.author.avatar_url)
 	await ctx.send(embed = embed)
 

@@ -47,6 +47,11 @@
                 "brief": "spams a message",
                 "long": "Spams a message a certain amount of times."
             },
+            "snipe": {
+                "usage": "",
+                "brief": "gets a deleted message",
+                "long": "Gets the last deleted message from a channel."
+            },
             "8ball": {
                 "usage": "",
                 "brief": "asks the 8ball a question",
@@ -236,6 +241,16 @@
                 "usage": "{username} {profile(optional)}",
                 "brief": "gets skyblock stats",
                 "long": "Get's a player's skyblock stats for their last active profile. If a profile is provided, then this command will get stats for that specific profile."
+            }
+        }
+    },
+    "Math": {
+        "emoji": ":1234:",
+        "commands": {
+            "calculate": {
+                "usage": "{expression}",
+                "brief": "calculates an expression",
+                "long": "Calculates a math expression. Accepts the operators: `+`, `-`, `*` or `x`, `/`, and `^`"
             }
         }
     }
