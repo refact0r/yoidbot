@@ -9,8 +9,8 @@ class math(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases = ['so', 'calculate', 'calc'])
-    async def solve(self, ctx, *, expression):
+    @commands.command(aliases = ['solve', 'calc'])
+    async def calculate(self, ctx, *, expression):
         exp = ''.join(expression)
         if len(exp) == 0:
             await ctx.send("Invalid Expression")
