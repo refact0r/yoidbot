@@ -19,7 +19,7 @@ class math(commands.Cog):
         if result == float("inf"):
             await ctx.send("Invalid Expression")
             return
-        if result.is_integer():
+        if isinstance(result, float) and result.is_integer():
             result = int(result)
         await ctx.send(result)
 
@@ -41,13 +41,13 @@ class math(commands.Cog):
                     exp = exp[result[1] + 1:]
                     count += result[1]
                 elif c == ')':
-                    nums.append(num)
                     break
                 else:
                     ops.append(c)
                     nums.append(num)
                     num = 0
             count += 1
+        nums.append(num)
         i = 0
         while i < len(ops):
             if ops[i] == '^':
