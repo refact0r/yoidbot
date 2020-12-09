@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from operator import truediv, mul, add, sub, pow
 
-operators = {'+': add, '-': sub, '*': mul, '/': truediv, '^': pow}
+operators = {'+': add, '-': sub, '*': mul, 'x': mul, '×': mul, '/': truediv, '÷': truediv, '^': pow}
 
 class math(commands.Cog):
 
