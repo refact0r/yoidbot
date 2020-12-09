@@ -74,7 +74,7 @@ class math(commands.Cog):
                 i += 1
         return nums[0], count
 
-    def eval(num1, op, num2):
+    def eval(self, num1, op, num2):
         if op == '/' and num2 == 0:
             return float("inf")
         return operators[op](num1, num2)
