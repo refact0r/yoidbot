@@ -9,20 +9,24 @@ class math(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases = ['solve', 'calc'])
+        @commands.command(aliases = ['solve', 'calc'])
     async def calculate(self, ctx, *, expression):
         exp = ''.join(c for c in expression if c in operators or c.isdigit())
         print(exp)
         if len(exp) == 0:
             await ctx.send("Invalid expression.")
             return
-        result = self.helper(exp)[0]
-        if result == float("inf"):
-            await ctx.send("Invalid expression.")
+        result = self.helper(exp)
+        if result[1] == -1:
+            await ctx.send("Error: Number limit reached.")
             return
-        if isinstance(result, float) and result.is_integer():
-            result = int(result)
-        await ctx.send(result)
+        elif result[1] == -2:
+            await ctx.send("Error: Divison by 0.")
+            return
+        num = result[0]
+        if isinstance(num, float) and num.is_integer():
+            num = int(num[0])
+        await ctx.send(num)
 
     @calculate.error
     async def calculate_error(self, ctx, error):
@@ -42,6 +46,8 @@ class math(commands.Cog):
             else:
                 if c == '(':
                     result = self.helper(exp)
+                    if result[1] < 0:
+                        return 0, result[1]
                     num = result[0]
                     exp = exp[result[1] + 1:]
                     count += result[1]
@@ -53,30 +59,51 @@ class math(commands.Cog):
                     num = 0
             count += 1
         nums.append(num)
+        for n in nums:
+            if n > 1000000000000:
+                return 0, -1
         i = 0
         while i < len(ops):
             if ops[i] == '^':
-                nums[i] = self.eval(nums[i], ops[i], nums[i + 1])
+                val = self.eval(nums[i], ops[i], nums[i + 1])
+                if val == float("inf"):
+                    return 0, -2
+                nums[i] = val
                 nums = nums[:i + 1] + nums[i + 2:]
                 ops = ops[:i] + ops[i + 1:]
             else:
                 i += 1
+        for n in nums:
+            if n > 1000000000000:
+                return 0, -1
         i = 0
         while i < len(ops):
             if ops[i] in ['*', '/', '×', 'x', '÷']:
-                nums[i] = self.eval(nums[i], ops[i], nums[i + 1])
+                val = self.eval(nums[i], ops[i], nums[i + 1])
+                if val == float("inf"):
+                    return 0, -2
+                nums[i] = val
                 nums = nums[:i + 1] + nums[i + 2:]
                 ops = ops[:i] + ops[i + 1:]
             else:
                 i += 1
+        for n in nums:
+            if n > 1000000000000:
+                return 0, -1
         i = 0
         while i < len(ops):
             if ops[i] in ['+', '-']:
-                nums[i] = self.eval(nums[i], ops[i], nums[i + 1])
+                val = self.eval(nums[i], ops[i], nums[i + 1])
+                if val == float("inf"):
+                    return 0, -2
+                nums[i] = val
                 nums = nums[:i + 1] + nums[i + 2:]
                 ops = ops[:i] + ops[i + 1:]
             else:
                 i += 1
+        for n in nums:
+            if n > 1000000000000:
+                return 0, -1
         return nums[0], count
 
     def eval(self, num1, op, num2):
@@ -84,6 +111,5 @@ class math(commands.Cog):
             return float("inf")
         return operators[op](num1, num2)
 	
-
 def setup(client):
     client.add_cog(math(client))
