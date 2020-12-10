@@ -9,7 +9,7 @@ class math(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-        @commands.command(aliases = ['solve', 'calc'])
+    @commands.command(aliases = ['solve', 'calc'])
     async def calculate(self, ctx, *, expression):
         exp = ''.join(c for c in expression if c in operators or c.isdigit())
         print(exp)
