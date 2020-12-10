@@ -63,7 +63,7 @@ class math(commands.Cog):
                 i += 1
         i = 0
         while i < len(ops):
-            if ops[i] == '*' or ops[i] == '/':
+            if ops[i] in ['*', '/', '×', 'x', '÷']:
                 nums[i] = self.eval(nums[i], ops[i], nums[i + 1])
                 nums = nums[:i + 1] + nums[i + 2:]
                 ops = ops[:i] + ops[i + 1:]
@@ -71,7 +71,7 @@ class math(commands.Cog):
                 i += 1
         i = 0
         while i < len(ops):
-            if ops[i] == '+' or ops[i] == '-':
+            if ops[i] in ['+', '-']:
                 nums[i] = self.eval(nums[i], ops[i], nums[i + 1])
                 nums = nums[:i + 1] + nums[i + 2:]
                 ops = ops[:i] + ops[i + 1:]
