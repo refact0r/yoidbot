@@ -280,6 +280,7 @@ async def pingleaderboard(ctx):
 	data = c.fetchall()
 	await ctx.send(f'lowest: {data[0][1]}ms by {data[0][2]}\nhighest: {data[1][1]}ms by {data[1][2]}')
 
+'''
 @client.command(aliases = ['s'])
 async def say(ctx, *, message):
 	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
@@ -304,6 +305,7 @@ async def spam(ctx, *, message):
 async def spam_error(ctx, error):
 	print(error)
 	await ctx.send('Please follow format: `y.spam {message} {amount}`')
+'''
 
 @client.command(aliases = ['8ball', '8b'])
 async def eightball(ctx):
