@@ -11,7 +11,7 @@ class math(commands.Cog):
 
     @commands.command(aliases = ['solve', 'calc'])
     async def calculate(self, ctx, *, expression):
-        exp = ''.join(c for c in expression if c in operators or c.isdigit())
+        exp = ''.join(c for c in expression if c in operators or c.isdigit() or c in ['(', ')'])
         print(exp)
         if len(exp) == 0:
             await ctx.send("Invalid expression.")
