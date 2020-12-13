@@ -25,7 +25,7 @@ class math(commands.Cog):
             return
         num = result[0]
         if isinstance(num, float) and num.is_integer():
-            num = int(num[0])
+            num = int(num)
         await ctx.send(num)
 
     @calculate.error
