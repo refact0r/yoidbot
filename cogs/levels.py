@@ -74,7 +74,10 @@ class levels(commands.Cog):
             congrat_string = f"Congratulations {msg.author.display_name}, you are now level {level}!"
             if badge_id != data[4][1]:
                 congrat_string += f" You also earned the badge {level_badge}"
-            await msg.channel.send(congrat_string)
+            c.execute("SELECT * FROM guilds WHERE guild_id = %s;", (msg.guild.id,))
+            guild_data = c.fetchone()
+            if guild_data[3] == True:
+                await msg.channel.send(congrat_string)
         badges = data[4]
         badges[1] = badge_id
         if data[2] > third:

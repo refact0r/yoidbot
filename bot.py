@@ -16,7 +16,6 @@ bot_token = os.getenv('BOT_TOKEN')
 DATABASE_URL = os.getenv('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 c = conn.cursor()
-c.execute("UPDATE guilds SET show_level_messages = TRUE;")
 #c.execute("CREATE TABLE userxp (id BIGINT, name TEXT, xp INT, level INT, badges INT[], mc_username TEXT, mc_uuid TEXT);")
 #c.execute("CREATE TABLE guilds (guild_id BIGINT, prefixes TEXT[]);") 
 #c.execute("DELETE FROM guilds;")
@@ -79,6 +78,33 @@ async def snipe(ctx):
 	embed.set_author(name = msg.author.name, icon_url = msg.author.avatar_url)
 	await ctx.send(embed = embed)
 
+
+@commands.guild_only()
+async def disablelevelmessages(ctx):
+	if not ctx.author.guild_permissions.administrator:
+		await ctx.send("You do not have the permissions to use this command.")
+		return
+	c.execute("SELECT * FROM guilds WHERE guild_id = %s;", (ctx.guild.id,))
+	data = c.fetchone()
+	if not data:
+		c.execute("INSERT INTO guilds VALUES (%s, %s, %s);", (ctx.guild.id, [], False))
+	else:
+		c.execute("UPDATE guilds SET show_level_messages = %s WHERE guild_id = %s;", (False, ctx.guild.id))
+	await ctx.send("Level messages were turned off for this server.")
+
+@commands.guild_only()
+async def enablelevelmessages(ctx):
+	if not ctx.author.guild_permissions.administrator:
+		await ctx.send("You do not have the permissions to use this command.")
+		return
+	c.execute("SELECT * FROM guilds WHERE guild_id = %s;", (ctx.guild.id,))
+	data = c.fetchone()
+	if not data:
+		c.execute("INSERT INTO guilds VALUES (%s, %s, %s);", (ctx.guild.id, [], True))
+	else:
+		c.execute("UPDATE guilds SET show_level_messages = %s WHERE guild_id = %s;", (True, ctx.guild.id))
+	await ctx.send("Level messages were turned on for this server.")
+		
 @client.command(aliases = ['ap'])
 @commands.has_permissions(manage_guild = True)
 @commands.guild_only()
@@ -90,7 +116,7 @@ async def addprefix(ctx, *, prefix):
 	c.execute("SELECT * FROM guilds WHERE guild_id = %s;", (ctx.guild.id,))
 	data = c.fetchone()
 	if not data:
-		c.execute("INSERT INTO guilds VALUES (%s, %s);", (ctx.guild.id, [prefix]))
+		c.execute("INSERT INTO guilds VALUES (%s, %s, %s);", (ctx.guild.id, [prefix], True))
 	else:
 		if prefix in data[1]:
 			await ctx.send("This server already has that prefix.")
