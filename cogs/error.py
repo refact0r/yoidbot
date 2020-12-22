@@ -1,46 +1,7 @@
 import discord
-import random
-from discord.ext import commands, tasks
-import os
-import time
-from discord.ext.commands.core import guild_only
-import requests
-import asyncio
-from itertools import cycle
-from discord.utils import get
-from discord.voice_client import VoiceClient
-from random import choice
-import shutil
-from os import close, error, system
-import json
-import sqlite3
-import re
-import logging
-import pyjokes
-from discord.ext.commands import Bot
-import operator
-import coc
-from discord import Permissions
-import string 
-import html
-from random import choice, randint
-from typing import Optional
-from aiohttp import request
-from discord import Member, Embed
-from discord.ext.commands import Cog, BucketType
-from discord.ext.commands import BadArgument
-from discord.ext.commands import command, cooldown
-
-import random
-import discord
-import urllib
-import secrets
-import asyncio
-import aiohttp
-import re
-import typing
+from discord.ext import commands
 import math
-from covid import Covid
+from os import error
 
 class error(commands.Cog):
 
