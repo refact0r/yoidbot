@@ -9,7 +9,6 @@ import asyncio
 from itertools import cycle
 from discord.utils import get
 from discord.voice_client import VoiceClient
-import youtube_dl
 from random import choice
 import shutil
 from os import close, error, system
