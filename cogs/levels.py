@@ -76,6 +76,7 @@ class levels(commands.Cog):
                 congrat_string += f" You also earned the badge {level_badge}"
             c.execute("SELECT * FROM guilds WHERE guild_id = %s;", (msg.guild.id,))
             guild_data = c.fetchone()
+            print(guild_data)
             if guild_data[2] == True:
                 await msg.channel.send(congrat_string)
         badges = data[4]
