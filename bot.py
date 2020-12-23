@@ -78,7 +78,7 @@ async def snipe(ctx):
 	embed.set_author(name = msg.author.name, icon_url = msg.author.avatar_url)
 	await ctx.send(embed = embed)
 
-
+@client.command(aliases = ['dlm'])
 @commands.guild_only()
 async def disablelevelmessages(ctx):
 	if not ctx.author.guild_permissions.administrator:
@@ -92,6 +92,7 @@ async def disablelevelmessages(ctx):
 		c.execute("UPDATE guilds SET show_level_messages = %s WHERE guild_id = %s;", (False, ctx.guild.id))
 	await ctx.send("Level messages were turned off for this server.")
 
+@client.command(aliases = ['elm'])
 @commands.guild_only()
 async def enablelevelmessages(ctx):
 	if not ctx.author.guild_permissions.administrator:
@@ -186,12 +187,6 @@ async def prefixes(ctx):
 		color = ctx.author.color
 	)
 	await ctx.send(embed = embed)
-
-@client.command(aliases = ['close', 'stop', 'die'])
-@commands.is_owner()
-async def shutdown(ctx):
-	await ctx.send("Bot shutting down...")
-	await client.close()
 
 @client.command(aliases = ['h'])
 async def help(ctx, command = None):
