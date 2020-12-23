@@ -151,10 +151,8 @@ async def removeprefix(ctx, *, prefix):
 		return
 	s = f"Removed prefix `{prefix}`"
 	if len(data[1]) <= 1:
-		c.execute("DELETE FROM guilds WHERE guild_id = %s;", (ctx.guild.id,))
 		s += "\nPrefixes were reset to the default prefixes (`y.`, `Y.`)."
-	else:
-		c.execute("UPDATE guilds SET prefixes = array_remove(prefixes, %s) WHERE guild_id = %s;", (prefix, ctx.guild.id))
+	c.execute("UPDATE guilds SET prefixes = array_remove(prefixes, %s) WHERE guild_id = %s;", (prefix, ctx.guild.id))
 	conn.commit()
 	await ctx.send(s)
 
