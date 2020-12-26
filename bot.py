@@ -19,8 +19,8 @@ c = conn.cursor()
 #c.execute("CREATE TABLE userxp (id BIGINT, name TEXT, xp INT, level INT, badges INT[], mc_username TEXT, mc_uuid TEXT);")
 #c.execute("ALTER TABLE guilds ADD COLUMN show_level_messages BOOL;") 
 #c.execute("DELETE FROM guilds;")
-c.execute("INSERT INTO ping VALUES (0, 1000, 'default');")
-c.execute("INSERT INTO ping VALUES (1, 1000, 'default');")
+#c.execute("INSERT INTO ping VALUES (0, 1000, 'default');")
+#c.execute("INSERT INTO ping VALUES (1, 1000, 'default');")
 #c.execute("UPDATE userxp SET badges = %s WHERE id = 508863359777505290;", ([2, 8],))\
 #c.execute("CREATE TABLE ping (type INT, time INT, person TEXT);")
 '''
