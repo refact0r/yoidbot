@@ -376,6 +376,10 @@ async def speakthetruth(ctx):
 	]
 	await ctx.send(truth[random.randint(0, len(truth) - 1)])
 
+@client.command()
+async def dog(ctx):
+	await ctx.send("dog is cool https://i.imgur.com/u4agHtY.jpeg")
+
 @client.command(aliases = ['wikipedia', 'w'])
 async def wiki(ctx, *, subject):
 	print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
