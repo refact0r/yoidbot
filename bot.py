@@ -378,7 +378,7 @@ async def speakthetruth(ctx):
 
 @client.command()
 async def dog(ctx):
-	await ctx.send("dog is cool https://i.imgur.com/u4agHtY.jpeg")
+	await ctx.send("dog is cool\nhttps://i.imgur.com/u4agHtY.jpeg")
 
 @client.command(aliases = ['wikipedia', 'w'])
 async def wiki(ctx, *, subject):
