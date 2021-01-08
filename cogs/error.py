@@ -1,4 +1,3 @@
-"""
 import discord
 from discord.ext import commands
 import math
@@ -72,4 +71,3 @@ class error(commands.Cog):
 
 def setup(client):
     client.add_cog(error(client))
-"""
