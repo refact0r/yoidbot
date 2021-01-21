@@ -43,7 +43,7 @@ class games(commands.Cog):
         conn.commit()
 
     @commands.command(aliases = ['t'])
-    @commands.cooldown(5, 30, commands.BucketType.channel)
+    @commands.cooldown(3, 30, commands.BucketType.channel)
     @commands.max_concurrency(1, commands.BucketType.channel, wait = False)
     async def trivia(self, ctx):
         print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
