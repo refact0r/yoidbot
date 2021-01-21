@@ -45,8 +45,7 @@ class reddit(commands.Cog):
 
     @meme.error
     async def meme_error(self, ctx, error):
-        print(error)
-        await ctx.send("Please follow format: `y.meme {subreddit}`")
+        await ctx.send(error)
 
     @commands.command(aliases = ['frie', 'f'])
     async def fries(self, ctx):
