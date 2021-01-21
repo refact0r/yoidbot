@@ -16,6 +16,7 @@ bot_token = os.getenv('BOT_TOKEN')
 DATABASE_URL = os.getenv('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 c = conn.cursor()
+
 #c.execute("CREATE TABLE userxp (id BIGINT, name TEXT, xp INT, level INT, badges INT[], mc_username TEXT, mc_uuid TEXT);")
 #c.execute("ALTER TABLE guilds ADD COLUMN show_level_messages BOOL;") 
 #c.execute("DELETE FROM guilds;")
@@ -59,6 +60,8 @@ async def on_ready():
 	print('bot has connected to discord')
 	for guild in client.guilds:
 		print(guild.name)
+		if guild.name == "!hsoy":
+			guild.leave()
 
 deleted = {}
 
