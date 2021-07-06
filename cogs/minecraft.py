@@ -23,7 +23,6 @@ class minecraft(commands.Cog):
         return commands.check(predicate)
 
     @commands.command(aliases = ['bucket', 'bc', 'bcv'])
-    @is_in_guild(710654601304473610)
     async def bucketcraft(self, ctx):
         print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         msg = await ctx.send("Loading...")
