@@ -16,6 +16,7 @@ class reddit(commands.Cog):
         self.client = client
 
     @commands.command(aliases = ['me', 'mem', 'mme', 'meem'])
+    @commands.cooldown(3, 30, commands.BucketType.channel)
     async def meme(self, ctx):
         print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         submissions = []
@@ -44,8 +45,7 @@ class reddit(commands.Cog):
 
     @meme.error
     async def meme_error(self, ctx, error):
-        print(error)
-        await ctx.send("Please follow format: `y.meme {subreddit}`")
+        await ctx.send(error)
 
     @commands.command(aliases = ['frie', 'f'])
     async def fries(self, ctx):
@@ -76,6 +76,7 @@ class reddit(commands.Cog):
         await ctx.send("Please follow format: `y.fries {subreddit}`")
 
     @commands.command(aliases = ['r', 'reddi', 'redd', 'red', 're'])
+    @commands.cooldown(3, 30, commands.BucketType.channel)
     async def reddit(self, ctx, subreddit):
         print(f"{ctx.guild.name} - #{ctx.channel.name} - {ctx.author.name} - {ctx.message.content}")
         submissions = []
