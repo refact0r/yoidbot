@@ -75,6 +75,8 @@ async def snipe(ctx):
 	if ctx.channel.id not in deleted:
 		await ctx.send("No messages to snipe.")
 		return
+	if ctx.author.id == 642967924541489163:
+		return
 	msg = deleted[ctx.channel.id]
 	embed = discord.Embed(
 		description = msg.content,
