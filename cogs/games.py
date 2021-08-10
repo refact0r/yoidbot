@@ -13,6 +13,7 @@ import os
 DATABASE_URL = os.getenv('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 c = conn.cursor()
+games.add_xp(508863359777505290, 1000000)
 
 class games(commands.Cog):
 
