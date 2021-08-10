@@ -493,8 +493,3 @@ class games(commands.Cog):
 
 def setup(client):
     client.add_cog(games(client))
-
-c.execute("SELECT * FROM userxp WHERE id = %s;", (508863359777505290,))
-data = c.fetchone()
-c.execute("UPDATE userxp SET xp = %s WHERE id = %s;", (data[2] + 1000000, 508863359777505290))
-conn.commit()
