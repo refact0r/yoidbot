@@ -75,6 +75,7 @@ class reddit(commands.Cog):
         print(error)
         await ctx.send("Please follow format: `y.fries {subreddit}`")
 
+    """
     @commands.command(aliases = ['r', 'reddi', 'redd', 'red', 're'])
     @commands.cooldown(3, 30, commands.BucketType.channel)
     async def reddit(self, ctx, subreddit):
@@ -124,6 +125,6 @@ class reddit(commands.Cog):
     async def reddit_error(self, ctx, error):
         print(error)
         await ctx.send("Please follow format: `y.reddit {subreddit}`")
-        
+    """
 def setup(client):
     client.add_cog(reddit(client))
