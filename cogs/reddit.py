@@ -105,7 +105,7 @@ class reddit(commands.Cog):
             embed.description += f"\n\n{submission.selftext}"
             await ctx.send(embed = embed)
             return
-        if submission.over_18 and not ctx.channel.is_nsfw() and subreddit != "3dfutanari":
+        if submission.over_18 and not ctx.channel.is_nsfw() and subreddit == "3dfutanari":
             await ctx.send("NSFW commands can only be used in a NSFW channel.")
             return
         if submission.url.startswith('https://i.redd.it/'):
